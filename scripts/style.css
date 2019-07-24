@@ -1,0 +1,41 @@
+
+
+.case{
+    width: 200px;
+    height: 150px;    
+    border: 1px solid white;    
+    background: orangered;      
+}
+.player1{
+    width: 200px;
+    height: 150px;    
+    border: 1px solid white;    
+    background: greenyellow;      
+}
+.player2{
+    width: 200px;
+    height: 150px;    
+    border: 1px solid white;    
+    background: blue;      
+}
+.note{
+    border:solid 3px #DEDEDE; 
+    background:#EFEFEF;
+    color:#222222;
+    padding:4px;
+    text-align:center;
+}
+.display1 {
+    border:solid 3px #DEDEDE;     
+    color:#222222;
+    padding:4px;
+    text-align:center;
+    background: greenyellow; 
+}
+.display2 {
+    border:solid 3px #DEDEDE;    
+    color:#222222;
+    padding:4px;
+    text-align:center;
+    background: blue;   
+}
