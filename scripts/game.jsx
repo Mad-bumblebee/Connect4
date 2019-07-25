@@ -67,7 +67,7 @@ class Game extends React.Component{
                 }                
                   if (this.step == rows * columns){
                     this.message = 'Ничья!';                 
-                    setTimeout(function() { alert('Ничья!' + player1.name) }, 1000);
+                    setTimeout(function() { alert('Ничья!') }, 1000);
                     break;  
                 }                      
               }     
