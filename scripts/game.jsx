@@ -43,14 +43,15 @@ class Game extends React.Component{
                 squares[rows-this.count][j] = <div className = {this.step % 2 === 0 ? player1.style : player2.style}></div> // div
                 mem[rows-this.count][j] = +isClicked                
                 this.count = 1                
-              } 
-              
-              player1.score += Math.max(winDiag(mem,1),Math.max(win(mem[i],1),win(col(mem,j),1)));
-              player2.score += Math.max(winDiag(mem,0),Math.max(win(mem[i],0),win(col(mem,j),0)));
-                           
+              }              
+            
 
               for (let i = 0; i < rows; i++){
-                for(let j = 0; j < columns; j++){                 
+                for(let j = 0; j < columns; j++){ 
+                  
+                  player1.score += Math.max(winDiag(mem,1),Math.max(win(mem[i],1),win(col(mem,j),1)));
+                  player2.score += Math.max(winDiag(mem,0),Math.max(win(mem[i],0),win(col(mem,j),0)));
+                               
 
                   if (win(mem[i],0) > 3 || win(col(mem,j),0) > 3 || winDiag(mem,0) > 3){                                         
                     this.message = 'Победил' + ' ' + player2.name
@@ -102,9 +103,7 @@ class Game extends React.Component{
         }
   }
      export default Game;
-   
-             
-
+  
               
 
 
