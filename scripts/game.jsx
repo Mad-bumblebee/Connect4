@@ -9,9 +9,9 @@ class Game extends React.Component{
         super()
         this.state = {
             isClicked : false,
-            div : <div className = 'case'></div>,            
-            squares: new Array(6).fill(<div className = 'case'></div>).map(() => new Array(7).fill(<div className = 'case'></div>)),
-            mem: new Array(6).fill(2).map(() => new Array(7).fill(2)),
+            // div : <div className = 'case'></div>,            
+            squares: new Array(6).fill().map(() => new Array(7).fill(<div className = 'case'></div>)),
+            mem: new Array(6).fill().map(() => new Array(7).fill(2)),
             player1 : {
               name : '',
               style : 'player1',
