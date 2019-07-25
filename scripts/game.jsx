@@ -15,12 +15,12 @@ class Game extends React.Component{
             player1 : {
               name : '',
               style : 'player1',
-              score : []
+              score : [0]
             },
             player2 : {
               name : '',
               style : 'player2',
-              score : []
+              score : [0]
             }              
         }                
         this.step = 0;
