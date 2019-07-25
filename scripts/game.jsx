@@ -15,12 +15,12 @@ class Game extends React.Component{
             player1 : {
               name : '',
               style : 'player1',
-              score : 0
+              score : []
             },
             player2 : {
               name : '',
               style : 'player2',
-              score : 0
+              score : []
             }              
         }                
         this.step = 0;
@@ -45,8 +45,8 @@ class Game extends React.Component{
                 this.count = 1                
               } 
               
-              player1.score = Math.max(winDiag(mem,1),Math.max(win(mem[i],1),win(col(mem,j),1)));
-              player2.score = Math.max(winDiag(mem,0),Math.max(win(mem[i],0),win(col(mem,j),0)));
+              player1.score += Math.max(winDiag(mem,1),Math.max(win(mem[i],1),win(col(mem,j),1)));
+              player2.score += Math.max(winDiag(mem,0),Math.max(win(mem[i],0),win(col(mem,j),0)));
                            
 
               for (let i = 0; i < rows; i++){
@@ -94,8 +94,8 @@ class Game extends React.Component{
                    <div>{this.matrix(this.rows, this.columns)}</div>
                    <div className = 'note'>
                      <h3>Ваш ход, {this.state.isClicked ? this.state.player1.name : this.state.player2.name}</h3><br/>
-                     <p>{player1.name} : {player1.score}</p>
-                     <p>{player2.name} : {player2.score}</p>                   
+                     <p>{player1.name} : {Math.max(...player1.score)}</p>
+                     <p>{player2.name} : {Math.max(...player2.score)}</p>                   
                      </div>
                      <div className = {isClicked ? 'display1' : 'display2'}>{this.message}</div>
                   </div>
