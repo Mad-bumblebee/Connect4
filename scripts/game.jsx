@@ -31,8 +31,7 @@ class Game extends React.Component{
       }     
   
     game(i,j){
-      const {isClicked,mem,player1,player2,div} = this.state
-      this.step++;      
+      const {isClicked,mem,player1,player2,div} = this.state          
       const rows = this.rows;
       const columns = this.columns;
       const squares = this.state.squares.slice(); 
@@ -40,6 +39,8 @@ class Game extends React.Component{
       
               for (let value of col(mem,j)) {if (value !== 2 && mem[0][j] === 2)  (this.count++)+1}
               if (mem[rows-this.count][j] === 2){
+                this.step++;
+                this.setState({isClicked : !this.state.isClicked});                
                 squares[rows-this.count][j] = <div className = {this.step % 2 === 0 ? player1.style : player2.style}></div> // div
                 mem[rows-this.count][j] = +isClicked                
                 this.count = 1                
@@ -50,8 +51,7 @@ class Game extends React.Component{
                 for(let j = 0; j < columns; j++){ 
                   
                   player1.score += Math.max(winDiag(mem,1),Math.max(win(mem[i],1),win(col(mem,j),1)));
-                  player2.score += Math.max(winDiag(mem,0),Math.max(win(mem[i],0),win(col(mem,j),0)));
-                               
+                  player2.score += Math.max(winDiag(mem,0),Math.max(win(mem[i],0),win(col(mem,j),0)));                               
 
                   if (win(mem[i],0) > 3 || win(col(mem,j),0) > 3 || winDiag(mem,0) > 3){                                         
                     this.message = 'Победил' + ' ' + player2.name
@@ -65,21 +65,24 @@ class Game extends React.Component{
                     break;  
                     // setTimeout(document.location.reload(true),3000); 
                 }                
+                  if (this.step == rows * columns){
+                    this.message = 'Ничья!';                 
+                    setTimeout(function() { alert('Ничья!' + player1.name) }, 1000);
+                    break;  
+                }                      
               }     
             }   
-          
+            console.log(this.step)
             this.setState({squares: squares});                        
           };     
          
-      matrix (rows,columns){
-          const {player1,player2} = this.state        
+      matrix (rows,columns){                
           let arr = new Array();        
           for (let i = 0; i < rows; i++){
               arr[i] = new Array();
             for (let j = 0; j < columns; j++){
                  arr[i][j] =  <Square value = {this.state.squares[i][j]}
-                 onClick={() => {this.setState({div : <div className = {this.step % 2 === 0 ? player1.style : player2.style}></div>, 
-                 isClicked : !this.state.isClicked}); this.game(i,j);}} key = {j}/>                                          
+                 onClick={() => {this.setState(this.game(i,j))}}/>                                          
             }
           }        
           return arr.map((e,i) => {return <div key={i} style = {{textAlign : 'center', float: 'left'}}>{e}</div>})
@@ -103,7 +106,7 @@ class Game extends React.Component{
         }
   }
      export default Game;
-  
+   
               
 
 
