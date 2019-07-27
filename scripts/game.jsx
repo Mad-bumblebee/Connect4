@@ -9,8 +9,8 @@ class Game extends React.Component{
         super()
         this.state = {
             isClicked : false,
-            // div : <div className = 'case'></div>,            
-            squares: new Array(6).fill().map(() => new Array(7).fill(<div className = 'case'></div>)),
+            condition : false,           
+            squares: new Array(6).fill().map(() => new Array(7).fill(<div className = 'case fade'></div>)),
             mem: new Array(6).fill().map(() => new Array(7).fill(2)),
             player1 : {
               name : '',
@@ -27,7 +27,8 @@ class Game extends React.Component{
         this.count = 1; 
         this.rows = 6;
         this.columns = 7;
-        this.message = ''               
+        this.message = '';
+        this.flag = false;               
       }     
   
     game(i,j){
@@ -55,25 +56,26 @@ class Game extends React.Component{
 
                   if (win(mem[i],0) > 3 || win(col(mem,j),0) > 3 || winDiag(mem,0) > 3){                                         
                     this.message = 'Победил' + ' ' + player2.name
-                    setTimeout(function() { alert('Победил' + ' ' + player2.name) }, 1000);
-                    break;  
-                    // setTimeout(document.location.reload(true),3000);
+                    this.setState({condition : true});
+                    this.flag = true;
+                    break;                    
                   }
                   if (win(mem[i],1) > 3 || win(col(mem,j),1) > 3 || winDiag(mem,1) > 3){                                      
                     this.message = 'Победил' + ' ' + player1.name                    
-                    setTimeout(function() { alert('Победил' + ' ' + player1.name) }, 1000);
-                    break;  
-                    // setTimeout(document.location.reload(true),3000); 
+                    this.setState({condition : true});
+                    this.flag = true;
+                    break;                       
                 }                
-                  if (this.step == rows * columns){
+                  if (this.step == rows * columns && !this.flag){
                     this.message = 'Ничья!';                 
-                    setTimeout(function() { alert('Ничья!') }, 1000);
+                    this.setState({condition : true});
                     break;  
                 }                      
               }     
-            }   
-            console.log(this.step)
-            this.setState({squares: squares});                        
+            }
+            console.log(this.state.condition)  
+            this.setState({squares: squares}); 
+            if(this.state.condition) if(!alert(this.message)){window.location.reload();}                                            
           };     
          
       matrix (rows,columns){                
@@ -81,7 +83,7 @@ class Game extends React.Component{
           for (let i = 0; i < rows; i++){
               arr[i] = new Array();
             for (let j = 0; j < columns; j++){
-                 arr[i][j] =  <Square value = {this.state.squares[i][j]}
+                 arr[i][j] =  <Square value = {this.state.squares[i][j]} key = {j}
                  onClick={() => {this.setState(this.game(i,j))}}/>                                          
             }
           }        
