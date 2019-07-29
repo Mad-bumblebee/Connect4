@@ -14,12 +14,12 @@ class Game extends React.Component{
             mem: new Array(6).fill().map(() => new Array(7).fill(2)),
             player1 : {
               name : '',
-              style : 'player1',
+              style : 'player1 fade',
               score : [0]
             },
             player2 : {
               name : '',
-              style : 'player2',
+              style : 'player2 fade',
               score : [0]
             }              
         }                
@@ -32,7 +32,7 @@ class Game extends React.Component{
       }     
   
     game(i,j){
-      const {isClicked,mem,player1,player2,div} = this.state          
+      const {isClicked,mem,player1,player2} = this.state          
       const rows = this.rows;
       const columns = this.columns;
       const squares = this.state.squares.slice(); 
@@ -45,8 +45,8 @@ class Game extends React.Component{
                 squares[rows-this.count][j] = <div className = {this.step % 2 === 0 ? player1.style : player2.style}></div> // div
                 mem[rows-this.count][j] = +isClicked                
                 this.count = 1                
-              }              
-            
+              }             
+                        
 
               for (let i = 0; i < rows; i++){
                 for(let j = 0; j < columns; j++){ 
